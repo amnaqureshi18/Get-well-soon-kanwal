@@ -1,0 +1,275 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription of Smiles for Kanwal 🌸</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff0f3 0%, #fffbf0 50%, #f3f0ff 100%);
+            min-height: 100vh;
+        }
+        .heading-font {
+            font-family: 'Fredoka', cursive;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px dashed #f472b6;
+            box-shadow: 0 20px 40px rgba(244, 114, 182, 0.15);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="text-gray-700 flex flex-col items-center justify-center p-4 sm:p-6">
+
+    <div id="welcome-screen" class="w-full max-w-lg glass-card rounded-3xl p-6 sm:p-10 text-center transition-all duration-500">
+        <div class="inline-block bg-pink-100 text-pink-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+            <i class="fa-solid fa-prescription-bottle-medical mr-1"></i> Special Care Portal
+        </div>
+        <div class="text-5xl mb-3 floating">🌸✨</div>
+        <h1 class="heading-font text-3xl sm:text-4xl text-pink-600 font-bold mb-2">
+            Get Well Soon, Kanwal!
+        </h1>
+        <p class="text-gray-500 text-sm sm:text-base mb-8">
+            A special prescription curated with love (and zero side effects). Let's check your vitals! 💕
+        </p>
+        <button onclick="startQuiz()" class="bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg hover:opacity-90 transition transform hover:scale-105">
+            Open Prescription ✨
+        </button>
+    </div>
+
+    <div id="quiz-screen" class="w-full max-w-lg glass-card rounded-3xl p-6 sm:p-8 hidden transition-all duration-500">
+        <div class="flex justify-between items-center mb-4 border-b pb-3 border-pink-100">
+            <span class="text-xs font-bold uppercase tracking-wider text-pink-400">Diagnosis Phase</span>
+            <span id="q-counter" class="text-xs font-bold bg-pink-50 text-pink-500 px-2.5 py-1 rounded-full">Question 1 of 2</span>
+        </div>
+
+        <h2 id="q-text" class="heading-font text-xl sm:text-2xl text-gray-800 mb-6"></h2>
+        <div id="q-options" class="space-y-3 mb-6"></div>
+
+        <div id="q-feedback" class="hidden bg-pink-50 border border-pink-200 p-4 rounded-2xl text-center mb-4 animate-fade-in">
+            <p id="feedback-text" class="text-sm font-semibold text-pink-600 mb-3"></p>
+            <button onclick="nextStep()" class="bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold py-2 px-6 rounded-xl shadow-md hover:opacity-90 transition text-sm">
+                Next Checkup <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="prescription-screen" class="w-full max-w-lg glass-card rounded-3xl p-6 sm:p-8 hidden transition-all duration-500">
+        <div class="flex justify-between items-start border-b-2 border-dashed border-pink-200 pb-4 mb-5">
+            <div>
+                <h2 class="heading-font text-2xl text-pink-600 font-bold"><i class="fa-solid fa-prescription text-rose-400"></i> Rx (Prescription)</h2>
+                <p class="text-xs text-gray-400">Patient: Kanwal | Status: Needs Extra Pampering 🤒💖</p>
+            </div>
+            <span class="text-xs font-semibold bg-green-100 text-green-700 px-3 py-1 rounded-full"><i class="fa-solid fa-circle-check"></i> Active Cure</span>
+        </div>
+
+        <div class="space-y-4 mb-6">
+            <!-- Medicine 1 -->
+            <div class="bg-pink-50/70 border border-pink-100 rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-pink-500 text-white text-xs px-2 py-0.5 rounded-md font-bold">1</span>
+                        <h3 class="heading-font font-bold text-gray-800">Pain killer li ya nahi? 💊</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1 pl-6">Strict doctor's orders. Time se lo!</p>
+                </div>
+                <button onclick="markMedDone(this, 1)" class="bg-white text-pink-500 border border-pink-300 text-xs font-bold px-4 py-2 rounded-xl hover:bg-pink-500 hover:text-white transition w-full sm:w-auto shadow-xs">
+                    Haan le li! ✅
+                </button>
+            </div>
+
+            <!-- Medicine 2 -->
+            <div class="bg-rose-50/70 border border-rose-100 rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded-md font-bold">2</span>
+                        <h3 class="heading-font font-bold text-gray-800">Bohat zyada Pyar aapke liye 💌</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1 pl-6">Dono haath khol kar catch karo!</p>
+                </div>
+                <button onclick="catchItem(this, 'Pyar caught successfully! 🥰💕')" class="bg-white text-rose-600 border border-rose-300 text-xs font-bold px-4 py-2 rounded-xl hover:bg-rose-500 hover:text-white transition w-full sm:w-auto shadow-xs">
+                    Catch karo! 💌
+                </button>
+            </div>
+
+            <!-- Medicine 3 -->
+            <div class="bg-purple-50/70 border border-purple-100 rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-purple-500 text-white text-xs px-2 py-0.5 rounded-md font-bold">3</span>
+                        <h3 class="heading-font font-bold text-gray-800">Bht sari care bhi aapke liye 🤗</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1 pl-6">Warm hug & cozy blanket vibes.</p>
+                </div>
+                <button onclick="catchItem(this, 'Care absorbed completely! 🌟🤗')" class="bg-white text-purple-600 border border-purple-300 text-xs font-bold px-4 py-2 rounded-xl hover:bg-purple-500 hover:text-white transition w-full sm:w-auto shadow-xs">
+                    Catch karo! 🤗
+                </button>
+            </div>
+        </div>
+
+        <div class="text-center bg-gradient-to-r from-pink-500 to-rose-400 text-white p-5 rounded-2xl shadow-md">
+            <h3 class="heading-font text-xl font-bold mb-1">Almost Done! 🚀</h3>
+            <p class="text-xs opacity-90 mb-4">Click below when you've taken all your happiness pills!</p>
+            <button onclick="triggerDelivery()" class="bg-white text-pink-600 font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-pink-50 transition transform hover:scale-105">
+                Delivered 🚀
+            </button>
+        </div>
+    </div>
+
+    <div id="medal-screen" class="w-full max-w-lg glass-card rounded-3xl p-6 sm:p-10 text-center hidden transition-all duration-700">
+        <div class="text-6xl mb-3 floating">🏆✨</div>
+        <div class="inline-block bg-amber-100 text-amber-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3 shadow-xs">
+            <i class="fa-solid fa-award mr-1"></i> Highest Honor Awarded
+        </div>
+        <h2 class="heading-font text-2xl sm:text-3xl text-pink-600 font-bold mb-3">
+            Best Patient Medal 🏅
+        </h2>
+        <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-6 bg-pink-50/80 p-4 rounded-2xl border border-pink-100">
+            Ab smile kar ke isay achieve kar sakty ho! Jldi thk ho jao pyriii Kanwal the cutest girl! 💖🌸
+        </p>
+        <button onclick="celebrateBig()" class="bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg hover:opacity-90 transition transform hover:scale-105">
+            <i class="fa-solid fa-face-smile-beam mr-1"></i> Big Smile Delivered! 😁✨
+        </button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "World ki sabse ___ girl? 🌍✨",
+                options: [
+                    { text: "Cute 😊", feedback: "Aww, cute toh hai hi! Par ek aur option try karo! 😉" },
+                    { text: "Cutest 🌸", feedback: "Bohot qareeb ho! Par option aur bhi behtar hai! 🤭" },
+                    { text: "Most Cutest 👑", feedback: "Bilkul 100% accurate! Tum jaisi koi nahi! 💕" }
+                ]
+            },
+            {
+                q: "Main tumhe kitna tang karti hoon? 😈😂",
+                options: [
+                    { text: "Thoda sa 🤏", feedback: "Jhoot bolna paap hai, naddi pahad jitna tang karti ho! 😂" },
+                    { text: "Bohat zyada 🙄", feedback: "Haan ye hui na asal baat! Har waqt bas tang karna hai! ❤️" },
+                    { text: "Limitless! ♾️", feedback: "Bilkul absolute correct diagnosis! Expert ho tang karne mein! ✨" }
+                ]
+            }
+        ];
+
+        let currentQ = 0;
+
+        function startQuiz() {
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const data = questions[currentQ];
+            document.getElementById('q-counter').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = data.q;
+            
+            const optContainer = document.getElementById('q-options');
+            optContainer.innerHTML = '';
+            document.getElementById('q-feedback').classList.add('hidden');
+
+            data.options.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-2xl bg-white border border-pink-100 hover:bg-pink-50 hover:border-pink-300 font-semibold text-gray-700 transition shadow-xs flex items-center justify-between group";
+                btn.innerHTML = `<span>${opt.text}</span> <i class="fa-solid fa-heart text-pink-300 group-hover:text-pink-500 transition"></i>`;
+                btn.onclick = () => selectOption(opt.feedback);
+                optContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(feedbackMsg) {
+            const buttons = document.getElementById('q-options').getElementsByTagName('button');
+            for(let b of buttons) {
+                b.disabled = true;
+                b.classList.add('opacity-70');
+            }
+
+            document.getElementById('feedback-text').innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-pink-500"></i> ${feedbackMsg}`;
+            document.getElementById('q-feedback').classList.remove('hidden');
+
+            confetti({
+                particleCount: 30,
+                spread: 60,
+                origin: { y: 0.7 }
+            });
+        }
+
+        function nextStep() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                loadQuestion();
+            } else {
+                document.getElementById('quiz-screen').classList.add('hidden');
+                document.getElementById('prescription-screen').classList.remove('hidden');
+                confetti({
+                    particleCount: 100,
+                    spread: 80,
+                    origin: { y: 0.5 }
+                });
+            }
+        }
+
+        function markMedDone(btn, num) {
+            btn.innerHTML = `<i class="fa-solid fa-check mr-1"></i> Done! ✅`;
+            btn.classList.remove('bg-white', 'text-pink-500');
+            btn.classList.add('bg-green-500', 'text-white');
+            btn.disabled = true;
+
+            confetti({
+                particleCount: 35,
+                spread: 50,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function catchItem(btn, msg) {
+            btn.innerHTML = `<i class="fa-solid fa-heart mr-1"></i> Caught! ✨`;
+            btn.classList.remove('bg-white', 'text-rose-600', 'text-purple-600');
+            btn.classList.add('bg-pink-500', 'text-white');
+            btn.disabled = true;
+
+            confetti({
+                particleCount: 40,
+                spread: 60,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function triggerDelivery() {
+            document.getElementById('prescription-screen').classList.add('hidden');
+            document.getElementById('medal-screen').classList.remove('hidden');
+
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.5 }
+            });
+        }
+
+        function celebrateBig() {
+            confetti({
+                particleCount: 250,
+                spread: 180,
+                origin: { y: 0.5 }
+            });
+        }
+    </script>
+</body>
+</html>
+```
